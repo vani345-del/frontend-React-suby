@@ -18,7 +18,10 @@ const AllProducts = () => {
         
        }
    }
-
+   useEffect(()=>{
+    handlerProducts()
+    console.log('this is useEffect')
+},[])
 
    const deleteProductById=async(productId)=>{
        try {
@@ -37,10 +40,7 @@ const AllProducts = () => {
        }
    }
 
-   useEffect(()=>{
-    handlerProducts();
-    console.log("this is useeffect")
-   },[])
+   
 
 
 

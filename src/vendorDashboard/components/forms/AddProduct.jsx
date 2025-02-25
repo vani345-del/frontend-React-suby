@@ -21,7 +21,7 @@ const AddProduct = () => {
 }
 
 const handleBestSeller=(e)=>{
-  const value=e.target.value=='true'
+  const value=e.target.value==='true'
   setBestSEller(value)
 
 }
@@ -37,7 +37,7 @@ const handleImage=(e)=>{
  try {
      const loginToken=localStorage.getItem('loginToken');
      const firmId=localStorage.getItem('firmId');
-     if(loginToken||firmId){
+     if(!loginToken||!firmId){
       console.log("user not authenticated")
      }
      const formData=new FormData();
@@ -45,6 +45,7 @@ const handleImage=(e)=>{
      formData.append('price',price);
      formData.append('image',image);
      formData.append('description',description);
+     formData.append('bestSeller', bestSeller)
      category.forEach((value)=>{
       formData.append('category',value);
      });

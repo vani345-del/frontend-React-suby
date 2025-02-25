@@ -7,6 +7,13 @@ const Register = ({showLoginhandler}) => {
   const[email,setEmail]=useState("")
   const[password,setPassword]=useState("")
   const[error,setError]=useState("true")
+  const [showPassword, setShowPassword] = useState(false);
+
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
 
   const handlerSubmit=async(e)=>{
        e.preventDefault();
@@ -27,6 +34,9 @@ const Register = ({showLoginhandler}) => {
               alert("vendor register success fully")
               showLoginhandler();
              }
+             else {
+              alert("Registration Failed, Contact Admin")
+            }
 
        } catch (error) {
         console.log("registrarion faild",error);
@@ -45,7 +55,10 @@ const Register = ({showLoginhandler}) => {
             <label>Email</label>
             <input type="text" name='email' value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='Enter our Email'/><br/>
             <label>Password</label>
-            <input type="password" name='password' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Enter your Password'/><br/>
+            <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} name='password' placeholder='enter your password' /><br />
+<span className='showPassword'
+  onClick={handleShowPassword}
+>{showPassword ? 'Hide' : 'Show'}</span>
             <div className="btnSubmit">
                 <button className='btnSubmit' type="submit">Submit</button>
             </div>

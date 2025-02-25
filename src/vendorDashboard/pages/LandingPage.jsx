@@ -23,6 +23,7 @@ const LandingPage = () => {
     const loginToken=localStorage.getItem('loginToken');
     if(loginToken){
       setLogOut(true)
+      setWelcom(true)
      
     }
   },[])
@@ -30,8 +31,10 @@ const LandingPage = () => {
 
   useEffect(()=>{
     const firmName=localStorage.getItem('firmName');
-    if(firmName){
+    const firmId = localStorage.getItem('firmId')
+    if(firmName||firmId){
        setshowTitle(false)
+       setWelcom(true)
     }
   },[])
 
@@ -43,6 +46,7 @@ const LandingPage = () => {
     localStorage.removeItem('firmName');
     setLogOut(false);
     setshowTitle(true);
+    setWelcom(false)
   }
   
   

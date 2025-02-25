@@ -6,7 +6,8 @@ const AddFirm = () => {
  const[category,setCategory]=useState([]);
  const [region,setRegion]=useState([]);
  const[offer,setOffer]=useState("");
- const [image,setImage]=useState(null)
+ const [image,setImage]=useState(null);
+ const [loading,setLoading]=useState(false);
 
 
 
@@ -42,6 +43,7 @@ const AddFirm = () => {
 
 const handleFirmSumbit=async(e)=>{
   e.preventDefault();
+  setLoading(true);
   try {
     const loginToken=localStorage.getItem('loginToken');
     if(!loginToken){
@@ -83,10 +85,22 @@ const handleFirmSumbit=async(e)=>{
       alert("faild to add firm")
      }
      const firmId=data.firmId;
+     const vendorRestuarant = data.vendorFirmName
      localStorage.setItem('firmId',firmId)
-  } catch (error) {
+     localStorage.setItem('firmName', vendorRestuarant)
+     window.location.reload()
+  } 
+  catch (error) {
     console.log("faild to add firm")
-  }
+    alert("failed to add Firm")
+  }finally {
+    setLoading(false); 
+}
+
+
+
+
+
 }
 
 
@@ -94,6 +108,17 @@ const handleFirmSumbit=async(e)=>{
 
   return (
     <div className="firmSection">
+       {loading &&        <div className="loaderSection">
+        <ThreeCircles
+          visible={loading}
+          height={100}
+          width={100}
+          color="#4fa94d"
+          ariaLabel="three-circles-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>}
         <form  onSubmit={handleFirmSumbit} className="tableForm">
             <h2>Add Firm</h2>
             <label>Firm Name</label>
